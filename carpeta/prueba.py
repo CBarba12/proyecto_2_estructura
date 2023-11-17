@@ -72,22 +72,7 @@ class Tabla_Simbolos:
     def obtener_tipo_retorno_funcion(self, nombre):
         funcion = self.buscar_funcion(nombre)
         return funcion['tipo_retorno'] if funcion else None
-    
-def leer_archivo_texto(nombre_archivo):
-    try:
-       with open(nombre_archivo, "r", encoding="utf-8") as archivo:
-        contenido = archivo.read()
-
-        return contenido
-    except FileNotFoundError:
-        print(f"Error: El archivo '{nombre_archivo}' no se encuentra.")
-        return None
-    except Exception as e:
-        print(f"Error inesperado al leer el archivo: {str(e)}")
-        return None
-    
-    
-
+      
 def es_numero(palabra):
     try:
         float(palabra)
@@ -108,7 +93,22 @@ def es_numero(palabra):
 
 def corte_palabras(oracion):
     palabras_y_simbolos = re.findall(r'\b\w+\b|\S', oracion)
-    return palabras_y_simbolos
+    return palabras_y_simbolos    
+    
+def leer_archivo_texto(nombre_archivo):
+    try:
+       with open(nombre_archivo, "r", encoding="utf-8") as archivo:
+        contenido = archivo.read()
+
+        return contenido
+    except FileNotFoundError:
+        print(f"Error: El archivo '{nombre_archivo}' no se encuentra.")
+        return None
+    except Exception as e:
+        print(f"Error inesperado al leer el archivo: {str(e)}")
+        return None
+    
+ 
 
 
 def analizar_codigo(nombre_archivo):
