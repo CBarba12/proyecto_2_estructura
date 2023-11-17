@@ -86,16 +86,30 @@ def leer_archivo_texto(nombre_archivo):
         print(f"Error inesperado al leer el archivo: {str(e)}")
         return None
     
+    
 
-def corte_palabras(fuente):
+def es_numero(palabra):
+    try:
+        float(palabra)
+        return True
+    except ValueError:
+        return False  
+
+#def corte_palabras(fuente):
 
      # Utilizamos una expresión regular para dividir la cadena en partes de caracteres y letras
-    coincidencias = re.split(r'(\W+)', fuente)  # '\W+' coincide con uno o más caracteres no alfabéticos
+  #  coincidencias = re.split(r'(\W+)', fuente)  # '\W+' coincide con uno o más caracteres no alfabéticos
 
     # Filtramos las partes para excluir espacios en blanco
-    coincidencias = [coincidencias for coincidencias in coincidencias if not coincidencias.isspace()]
+   # coincidencias = [coincidencias for coincidencias in coincidencias if not coincidencias.isspace()]
 
-    return coincidencias
+    #return coincidencias
+
+
+def corte_palabras(oracion):
+    palabras_y_simbolos = re.findall(r'\b\w+\b|\S', oracion)
+    return palabras_y_simbolos
+
 
 def analizar_codigo(nombre_archivo):
     a = leer_archivo_texto(nombre_archivo)
