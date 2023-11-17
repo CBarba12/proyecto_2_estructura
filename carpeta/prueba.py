@@ -27,6 +27,8 @@ palabras_reservadas = {
 
 
 operadores_llave=operadores.keys()
+tipos_de_datos_llave=tipos_de_datos.keys()
+palabras_reservadas_llave=palabras_reservadas.keys()
 #-----------------------------------------------------------------
 
 class Tabla_Simbolos:
@@ -58,6 +60,18 @@ class Tabla_Simbolos:
     #----------------------- Métodos para funciones--------------------------------------------------------
     def agregar_funcion(self, nombre, tipo_retorno):
         self.funciones[nombre] = {'tipo_retorno': tipo_retorno}
+    def buscar_funcion(self, nombre):
+        return self.funciones.get(nombre, {'tipo_retorno': None})
+
+    def obtener_nombres_funciones(self):
+        return list(self.funciones.keys())
+
+    def obtener_funciones(self):
+        return [(nombre, funcion['tipo_retorno']) for nombre, funcion in self.funciones.items()]
+
+    def obtener_tipo_retorno_funcion(self, nombre):
+        funcion = self.buscar_funcion(nombre)
+        return funcion['tipo_retorno'] if funcion else None
     
 def leer_archivo_texto(nombre_archivo):
     try:
