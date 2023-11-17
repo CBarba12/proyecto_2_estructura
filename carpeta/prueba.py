@@ -32,7 +32,9 @@ operadores_llave=operadores.keys()
 class Tabla_Simbolos:
     def __init__(self):
         self.simbolos = {}
+        self.funciones = {}
 
+    #------ Métodos para variables------------------------------------------------------
     def agregar_simbolo(self, nombre, tipo, valor=None):
         self.simbolos[nombre] = {'tipo': tipo, 'valor': valor}
 
@@ -205,12 +207,7 @@ def analizar_codigo(nombre_archivo):
     else:
         print("El código fuente es correcto.")
         
-        
-        
 
-
-
-        
 
 if __name__ == "__main__":
     analizar_codigo("m.txt")
