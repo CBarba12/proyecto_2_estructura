@@ -1,4 +1,4 @@
-int x = 40
+int x = "hola"
 void funcion(float v, string n){
  if (v > 0.0){
  n = “Mayor”
