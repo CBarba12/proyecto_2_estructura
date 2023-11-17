@@ -41,9 +41,24 @@ class Tabla_Simbolos:
     def buscar_simbolo(self, nombre):
         return self.simbolos.get(nombre, {'tipo': None, 'valor': None})
 
+    def obtener_nombres(self):
+        return list(self.simbolos.keys())
 
     def obtener_simbolos(self):
-        return list(self.simbolos.keys())   
+        return [(nombre, simbolo['tipo'], simbolo['valor']) for nombre, simbolo in self.simbolos.items()] 
+    
+    def obtener_tipo(self, nombre):
+        simbolo = self.buscar_simbolo(nombre)
+        return simbolo['tipo'] if simbolo else None
+
+    def obtener_valor(self, nombre):
+        simbolo = self.buscar_simbolo(nombre)
+        return simbolo['valor'] if simbolo else None
+    
+    #----------------------- Métodos para funciones--------------------------------------------------------
+    def agregar_funcion(self, nombre, tipo_retorno):
+        self.funciones[nombre] = {'tipo_retorno': tipo_retorno}
+    
 def leer_archivo_texto(nombre_archivo):
     try:
        with open(nombre_archivo, "r", encoding="utf-8") as archivo:
