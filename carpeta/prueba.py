@@ -97,11 +97,6 @@ def corte_palabras(fuente):
 
     return coincidencias
 
-operadores_key=operadores.keys()
-
-palabras_reservadas_key=palabras_reservadas.keys()
-
-
 def analizar_codigo(nombre_archivo):
     a = leer_archivo_texto(nombre_archivo)
     tabla = Tabla_Simbolos()
