@@ -101,19 +101,7 @@ def corte_palabras(oracion):
 
 
 
-def leer_archivo_texto(nombre_archivo):
-    try:
-       with open(nombre_archivo, "r", encoding="utf-8") as archivo:
-        contenido = archivo.read()
 
-        return contenido
-    except FileNotFoundError:
-        print(f"Error: El archivo '{nombre_archivo}' no se encuentra.")
-        return None
-    except Exception as e:
-        print(f"Error inesperado al leer el archivo: {str(e)}")
-        return None
-    
  
 
 class AnalizadorSemantico:
