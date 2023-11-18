@@ -21,7 +21,11 @@ operadores = {
     '<<': 'Desplazamiento izquierdo',
     '>>': 'Desplazamiento derecho'
 }
-tipos_de_datos = {'int':'Entero', 'float':'flotante', 'string':'cadena', 'void':'void'}
+tipos_de_datos = {
+     'int':'Entero', 
+     'float':'flotante',
+       'string':'cadena',
+         'void':'void'}
 palabras_reservadas = {
     'if': 'if',
     'while': 'bucle while',
@@ -39,12 +43,18 @@ palabras_reservadas_llave=palabras_reservadas.keys()
 
 
 class AnalizadorSemantico:
+    """
+    Clase que realiza análisis semántico de un código fuente.
+    """
 
     def __init__(self):
         self.tabla_de_simbolos = Tabla_Simbolos()  # Asumo que TablaDeSimbolos es la clase que estás utilizando
         self.utiles=Utilidades()
 
     def leer_archivo_texto(self, nombre_archivo):
+        """
+        Lee el contenido de un archivo de texto.
+        """
         try:
             with open(nombre_archivo, "r", encoding="utf-8") as archivo:
                 contenido = archivo.read()
@@ -58,6 +68,10 @@ class AnalizadorSemantico:
 
     def analizar_codigo(self, codigo):
      
+        """
+        Analiza el código dividiéndolo en líneas y llamando al análisis de cada línea.
+        """
+
         lineas = codigo.split('\n')
 
         for numero_linea, linea in enumerate(lineas, start=1):
@@ -67,6 +81,11 @@ class AnalizadorSemantico:
 
 
     def analizar_linea(self, linea, numero_linea):
+        """
+        Para la realizacion del proyecto se analizo como esta estructurado las asignaciones y las funciones.
+        """
+
+
         palabras =  self.utiles.corte_palabras(linea.strip())
         conta = len(palabras)
          

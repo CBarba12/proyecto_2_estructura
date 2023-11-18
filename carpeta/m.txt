@@ -1,7 +1,8 @@
 int x = "hola"
 void funcion(float v, string n){
- if (v > 0.0){
+ while (n == "hola"){
  p = “Mayor”
+
  x = x + 5
  }
 }

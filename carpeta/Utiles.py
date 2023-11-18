@@ -1,6 +1,10 @@
 from collections import deque
 import re
 
+
+"""
+clase utiles que posee metodos utilizados para ayudar al analizador
+"""
 class Utilidades:
     @staticmethod
     def es_numero(palabra):
