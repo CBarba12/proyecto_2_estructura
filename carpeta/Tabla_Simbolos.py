@@ -1,6 +1,7 @@
 from collections import deque
 import re
 
+
 class Tabla_Simbolos:
     def __init__(self):
         self.simbolos = {}
