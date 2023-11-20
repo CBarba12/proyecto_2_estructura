@@ -405,7 +405,7 @@ if __name__ == "__main__":
     contenido_codigo_2 = a.leer_archivo_texto(nombre_archivo_2)
     contenido_codigo_3 = a.leer_archivo_texto(nombre_archivo_3)
 
-    print("-------------------------PRIMER METODO--------------------------------")
+    print("-------------------------PRIMER METODO K--------------------------------")
     print("       ")
 
     if contenido_codigo:
@@ -413,7 +413,7 @@ if __name__ == "__main__":
     else:
         print("No se pudo analizar el código debido a errores en la lectura del archivo.")
 
-    print("-------------------------SEGUNDO METODO--------------------------------")
+    print("-------------------------SEGUNDO METODO m--------------------------------")
     print("       ")
 
     if contenido_codigo_2:
@@ -422,7 +422,7 @@ if __name__ == "__main__":
         print("No se pudo analizar el código debido a errores en la lectura del archivo.")
 
 
-    print("-------------------------TERCER METODO--------------------------------")
+    print("-------------------------TERCER METODO  p--------------------------------")
     print("       ")
 
     if contenido_codigo_3:
