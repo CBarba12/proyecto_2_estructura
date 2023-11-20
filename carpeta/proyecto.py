@@ -30,7 +30,10 @@ palabras_reservadas = {
     'if': 'if',
     'while': 'bucle while',
 }
-
+"""
+se crearon los diccionarios de operador,de datos,palabras  y se obtubieron sus repsctivas
+llaves                 
+"""
 
 operadores_llave=operadores.keys()
 tipos_de_datos_llave=tipos_de_datos.keys()
@@ -45,6 +48,8 @@ palabras_reservadas_llave=palabras_reservadas.keys()
 class AnalizadorSemantico:
     """
     Clase que realiza análisis semántico de un código fuente.
+    Cabe recalcar que segun el analizador y el leguaje c++ las asignaciones ya sean string , float,void,int tienen 
+    que ser estrigtamente en minuscula.
     """
 
     def __init__(self):
@@ -69,7 +74,7 @@ class AnalizadorSemantico:
     def analizar_codigo(self, codigo):
      
         """
-        Analiza el código dividiéndolo en líneas y llamando al análisis de cada línea.
+        Analiza el código dividiéndolo en líneas y llamando al metodo análisis_línea.
         """
 
         lineas = codigo.split('\n')
@@ -83,17 +88,28 @@ class AnalizadorSemantico:
     def analizar_linea(self, linea, numero_linea):
         """
         Para la realizacion del proyecto se analizo como esta estructurado las asignaciones y las funciones.
+        Asignacion [1:tipo de declaracion , 2:variable ,3 :=, 4:el valor a asignar] si cumple estos requisitos se guarda en la tabla
+        para las funciones se hizo el mismo analisis 1:tipo de dato funcion 2:nombre de funcion 3:parentesis 4: asignaciones sin embargo aqui las asignaciones de los parametros no tienen un = 
         """
 
 
         palabras =  self.utiles.corte_palabras(linea.strip())
         conta = len(palabras)
          
+        """
+        a la linea se le quita los espacios en blanco y se guarda en palabra despues se cuenta cuantras palabras tiene
+        y se hace un for para recorrer palabra por palabra la linea para identificar que es cada cosa
+        """
         for posicion in range(conta):
          
             palabra_actual = palabras[posicion].strip()
 
+            """
+            Asignacion de un variable
+            tipos_de_datos_llave es un dicionario y se pregunta si palabra_actual esta en el diccionario
+            utiles.es_numero valida si k es un entero o no 
 
+            """
             if palabra_actual in tipos_de_datos_llave and "=" in palabras:
                 
                 if posicion+1<conta and posicion+2<conta:
@@ -101,6 +117,11 @@ class AnalizadorSemantico:
                         k= palabras[posicion+3]
 
 
+                        """
+                        se busca saber si palabra actual es un tipo de dato entero y que k sea un numero  o este en la tabla si no
+                        es un error asi para los int,float,string 
+                        """
+                     
                       #  print(self.tabla_de_simbolos.buscar_simbolo(k))
                         if palabra_actual == "int" and ( self.utiles.es_numero(k) or self.tabla_de_simbolos.obtener_tipo(k)=="int"):
                            
@@ -165,10 +186,17 @@ class AnalizadorSemantico:
 
 
                # print(self.tabla_de_simbolos.obtener_simbolos())
+           
+               
 
             elif  palabra_actual in self.tabla_de_simbolos.obtener_nombres() and "=" in palabras :  # buscar si la palabra se encuentra en el dicionario
                      
-         
+                """
+             si palabra actual esta en el diccionario   se valida si la asignacion que le entra es un tipo de dato valido
+             si es entero tiene que ser entero
+             o si es string tiene que ser una cadena 
+              
+                """
 
                 if posicion+1<conta and posicion+2<conta: # valorar si la busqueda es correcta
                     if palabras[posicion+1]=="=" :
@@ -181,6 +209,8 @@ class AnalizadorSemantico:
                             
                             pos = posicion + 3
                             if pos<conta:
+                               
+
                                 for cont in range(pos, len(palabras)):
                                     if palabras[cont] in  operadores_llave:
                                             
@@ -206,18 +236,19 @@ class AnalizadorSemantico:
 
                             
                        
-                             
+                             # si la el dato es un entero y se asigna un string
                         
                         if ((self.tabla_de_simbolos.obtener_tipo(palabra_actual) == "int" )or  self.tabla_de_simbolos.obtener_tipo(palabra_actual) == "float") and k=='"' :
                                 print(f"Error - Línea {numero_linea}: Variable '{palabras[posicion].strip()}' asignacion incorrecta")
                                  
+                        # si la el dato es un string y se asigna un entero
                              
                         elif self.tabla_de_simbolos.obtener_tipo(palabra_actual) == "string" and  self.utiles.es_numero(k)==True: 
                             print(f"Error - Línea {numero_linea}: Variable '{palabras[posicion].strip()}' asignacion incorrecta")
                              
         
 
-            elif ( palabra_actual!= "") and  ("=" in palabras) and (palabra_actual not in self.tabla_de_simbolos.obtener_nombres()) and (palabra_actual not in palabras_reservadas_llave )and "(" not in palabras :
+            elif ( palabra_actual is not "") and  ("=" in palabras) and (palabra_actual not in self.tabla_de_simbolos.obtener_nombres()) and (palabra_actual not in palabras_reservadas_llave )and "(" not in palabras :
                 
                 if posicion+1<conta:
                     if palabras[posicion+1]=="=" :
@@ -229,9 +260,19 @@ class AnalizadorSemantico:
 
             elif   "(" in palabras and ")" in palabras  :
                 
-                if palabra_actual in tipos_de_datos_llave: 
-
-                    if palabra_actual == "int" and  palabras[ posicion+2]== "(": 
+                """
+               aqui se analisa el tipo de dato de la funcion ya sea int ,void,string,float y se ve si existen y tambien el nombre de la 
+               funcion
+              
+                """
+                if palabra_actual in tipos_de_datos_llave: # si palabra actual esta en datos 
+                    """
+                    aqui se analisa el tipo de dato de la funcion ya sea int ,void,string,float y se ve si existen y tambien el nombre de la 
+                    funcion
+                    si palabra_acutual es un tipo de dato int ,void,string,float y  en la linea palabras se encuenta un ( se guarda en la table
+              
+                    """
+                    if palabra_actual == "int" and  palabras[ posicion+2]== "(":  
                             self.tabla_de_simbolos.agregar_funcion(palabras[1],palabras[0])
                             
        
@@ -250,6 +291,13 @@ class AnalizadorSemantico:
                             
             #--------------------------------------------------------------------------------------------- 
                     k= palabras[posicion+2]# asignar en la tabla varaiable que esta en una funcion
+
+                    """
+                    
+                    si palabra_actual es un tipo de dato int ,void,string,float y k es el valor que esta 2 posiciones despues de palabra actual
+                    y marca si se encuenta un ) o una [ , ] para que se valide y se guarde en la tabla
+              
+                    """
  
                     if palabra_actual == "float" and  (k=="," or k==")"):
                             self.tabla_de_simbolos.agregar_simbolo(palabras[posicion+1],palabra_actual,)
@@ -269,6 +317,11 @@ class AnalizadorSemantico:
                  k= palabras[posicion+2]
                  j=palabras[posicion+4]
                 
+
+                 """
+                    dentro de los if o while se valora los datos y se busca si hay un arror de asignacion de comparacion
+                    de diferente tipo etc
+                 """
                 # if  self.tabla_de_simbolos.buscar_simbolo(j) and k in self.tabla_de_simbolos.obtener_simbolos:
                  if self.utiles.es_numero(k) and self.utiles.es_numero(j):
 
@@ -299,6 +352,13 @@ class AnalizadorSemantico:
                         print(f"Error - Línea {numero_linea}:  DIFERENCIAS EN LA DECLARACION DE VARIABLES") 
             
             if palabra_actual == "return" :
+                 """
+                   en el retur se busca primero obtener en nombre de la funcion en la tabla
+                   despues con el nombre de la funcion obtener su tipo de dato ya sea int ,float, string o void
+                   y despues ya obtenido estos datos comparar con el dato que le sigue al return valorar si es 
+                   int, string ,float 
+
+                 """
                  if conta>1:
                      nombre=self.tabla_de_simbolos.obtener_nombres_funciones()
                      if len(nombre)>0: 
