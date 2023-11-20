@@ -1,6 +1,6 @@
 int x = "hola"
 void funcion(float v, string n){
- while (n == "hola"){
+ while (v = "hola"){
  p = “Mayor”
 
  x = x + 5

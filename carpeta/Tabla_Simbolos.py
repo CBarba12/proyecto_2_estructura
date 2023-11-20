@@ -6,7 +6,10 @@ class Tabla_Simbolos:
     def __init__(self):
         self.simbolos = {}
         self.funciones = {}
-
+        """
+         se creo una clase con dos diccionarios
+         para funcion y variable 
+        """
     #------ Métodos para variables------------------------------------------------------
     def agregar_simbolo(self, nombre, tipo, valor=None):
         self.simbolos[nombre] = {'tipo': tipo, 'valor': valor}

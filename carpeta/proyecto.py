@@ -397,11 +397,39 @@ if __name__ == "__main__":
     a = AnalizadorSemantico()
 
    
-    nombre_archivo = "m.txt"
+    nombre_archivo = "k.txt"
+    nombre_archivo_2 = "m.txt"
+    nombre_archivo_3 = "p.txt"
 
     contenido_codigo = a.leer_archivo_texto(nombre_archivo)
+    contenido_codigo_2 = a.leer_archivo_texto(nombre_archivo_2)
+    contenido_codigo_3 = a.leer_archivo_texto(nombre_archivo_3)
+
+    print("-------------------------PRIMER METODO--------------------------------")
+    print("       ")
 
     if contenido_codigo:
         a.analizar_codigo(contenido_codigo)
     else:
         print("No se pudo analizar el código debido a errores en la lectura del archivo.")
+
+    print("-------------------------SEGUNDO METODO--------------------------------")
+    print("       ")
+
+    if contenido_codigo_2:
+        a.analizar_codigo(contenido_codigo_2)
+    else:
+        print("No se pudo analizar el código debido a errores en la lectura del archivo.")
+
+
+    print("-------------------------TERCER METODO--------------------------------")
+    print("       ")
+
+    if contenido_codigo_3:
+        a.analizar_codigo(contenido_codigo_3)
+    else:
+        print("No se pudo analizar el código debido a errores en la lectura del archivo.")
+
+
+
+    
