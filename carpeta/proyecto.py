@@ -49,7 +49,8 @@ class AnalizadorSemantico:
     """
     Clase que realiza análisis semántico de un código fuente.
     Cabe recalcar que segun el analizador y el leguaje c++ las asignaciones ya sean string , float,void,int tienen 
-    que ser estrigtamente en minuscula.
+    que ser estrigtamente en minuscula y ademas que al ser un analizador semantico se tiene se presupone   que el codigo
+    esta sintacticamente bien.
     """
 
     def __init__(self):
@@ -93,14 +94,14 @@ class AnalizadorSemantico:
         """
 
 
-        palabras =  self.utiles.corte_palabras(linea.strip())
-        conta = len(palabras)
+        palabras =  self.utiles.corte_palabras(linea.strip())# palabra es linia sin espacios en blanco
+        conta = len(palabras)  #contar cuantos caracteres tien la linia palabra
          
         """
         a la linea se le quita los espacios en blanco y se guarda en palabra despues se cuenta cuantras palabras tiene
         y se hace un for para recorrer palabra por palabra la linea para identificar que es cada cosa
         """
-        for posicion in range(conta):
+        for posicion in range(conta): # este for va desgranando caracter por caracter de la linia palabra
          
             palabra_actual = palabras[posicion].strip()
 
@@ -110,7 +111,7 @@ class AnalizadorSemantico:
             utiles.es_numero valida si k es un entero o no 
 
             """
-            if palabra_actual in tipos_de_datos_llave and "=" in palabras:
+            if palabra_actual in tipos_de_datos_llave and "=" in palabras: 
                 
                 if posicion+1<conta and posicion+2<conta:
                     if palabras[posicion+2]=="=" :
@@ -189,7 +190,7 @@ class AnalizadorSemantico:
            
                
 
-            elif  palabra_actual in self.tabla_de_simbolos.obtener_nombres() and "=" in palabras :  # buscar si la palabra se encuentra en el dicionario
+            elif  palabra_actual in self.tabla_de_simbolos.obtener_nombres() and "=" in palabras :  # buscar si la palabra se encuentra en el dicionario y que la linia palabra haya un igual
                      
                 """
              si palabra actual esta en el diccionario   se valida si la asignacion que le entra es un tipo de dato valido
@@ -258,7 +259,7 @@ class AnalizadorSemantico:
 
 # ----------------------------esto if es de la declaracion de metodos--------------------------------------------
 
-            elif   "(" in palabras and ")" in palabras  :
+            elif   "(" in palabras and ")" in palabras  :# si en linia palabra se tiene dos parentesis y los pa
                 
                 """
                aqui se analisa el tipo de dato de la funcion ya sea int ,void,string,float y se ve si existen y tambien el nombre de la 
